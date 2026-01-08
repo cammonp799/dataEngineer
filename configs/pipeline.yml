@@ -1,7 +1,7 @@
 pipeline:
   name: "daily_sales_etl"
   owner: "data-engineering"
-  schedule: "0 7 * * *"
+  schedule: "0 5 * * *"
   retry:
     max_attempts: 3
     backoff_seconds: 60
@@ -21,4 +21,4 @@ targets:
 
 quality:
   null_threshold_pct: 1
-  duplicates_allowed: true
+  duplicates_allowed: false
