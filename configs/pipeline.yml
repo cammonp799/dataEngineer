@@ -1,0 +1,24 @@
+pipeline:
+  name: "daily_sales_etl"
+  owner: "data-engineering"
+  schedule: "0 6 * * *"
+  retry:
+    max_attempts: 3
+    backoff_seconds: 60
+
+sources:
+  - name: "shopify_orders"
+    format: "json"
+    freshness_hours: 24
+  - name: "payments"
+    format: "csv"
+    freshness_hours: 24
+
+targets:
+  warehouse: "duckdb"
+  dataset: "analytics"
+  table: "fact_orders"
+
+quality:
+  null_threshold_pct: 1
+  duplicates_allowed: false
